@@ -29,7 +29,7 @@ public class SystemController {
     @GetMapping("/readiness")
     public Map<String, String> getReadiness() {
         Map<String, String> answer = new HashMap<>();
-        answer.put("rancherService", "OK");
+        answer.put("RancherService", "OK");
         return answer;
     }
 }

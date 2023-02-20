@@ -30,7 +30,7 @@ public class SystemController {
     @GetMapping("/readiness")
     public Map<String, String> getReadiness() {
         Map<String, String> answer = new HashMap<>();
-        answer.put("landscapeService", "OK");
+        answer.put("LandscapeService", "OK");
         return answer;
     }
 }

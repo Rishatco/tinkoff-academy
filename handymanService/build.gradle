@@ -18,6 +18,11 @@ repositories {
 	mavenCentral()
 }
 
+springBoot {
+	buildInfo()
+}
+
+
 ext {
 	set('testcontainersVersion', "1.17.6")
 }
