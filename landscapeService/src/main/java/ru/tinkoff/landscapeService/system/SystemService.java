@@ -19,10 +19,7 @@ import ru.tinkoff.proto.StatusServiceGrpc;
 import ru.tinkoff.proto.StatusServiceGrpc.StatusServiceBlockingStub;
 import ru.tinkoff.proto.VersionResponse;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -32,8 +29,8 @@ public class SystemService {
     private final GrpcChannelFactory grpcChannelFactory;
     private final String[] servicesNameMask = {"rancherService", "handymanService"};
 
-    public Map<String, Status[]> getStatus(){
-        Map<String, Status[]> connectedServicesStatus = initServicesInfoMap();
+    public Map<String, List<Status>> getStatus(){
+        Map<String, List<Status>> connectedServicesStatus = initServicesInfoMap();
         for(String channelName: grpcChannelsProperties.getClient().keySet()) {
 
             Channel serviceChannel = grpcChannelFactory.createChannel(channelName);
@@ -48,20 +45,21 @@ public class SystemService {
                     .version(versionResponse.getVersion())
                     .host(serviceChannel.authority())
                     .build();
-            connectedServicesStatus.get(getServiceMaskFromName(channelName));
-
+            connectedServicesStatus.get(getServiceMaskFromName(channelName)).add(status);
         }
+
+
         return  connectedServicesStatus;
     }
 
-    private Map<String, Status[]> initServicesInfoMap() {
-        Map<String, Status[]> connectedServicesStatus = new HashMap<>();
+    private Map<String, List<Status>> initServicesInfoMap() {
+        Map<String, List<Status>> connectedServicesStatus = new HashMap<>();
         for (String serviceNameMask:  servicesNameMask)
-            connectedServicesStatus.put(serviceNameMask, new Status[]{});
+            connectedServicesStatus.put(serviceNameMask, new ArrayList<>());
         return  connectedServicesStatus;
     }
 
     private String getServiceMaskFromName(String channelName){
-        return Arrays.stream(servicesNameMask).filter(mask -> channelName.contains(mask)).findFirst().orElse("UnknownService");
+        return Arrays.stream(servicesNameMask).filter(channelName::contains).findFirst().orElse("UnknownService");
     }
 }
