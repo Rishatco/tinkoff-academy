@@ -1,5 +1,7 @@
 package ru.tinkoff.landscapeService.system;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +12,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/system")
+@RequiredArgsConstructor
 public class SystemController {
 
+    private final BuildProperties buildProperties;
 
     /**
      * check service liveness
@@ -30,7 +34,7 @@ public class SystemController {
     @GetMapping("/readiness")
     public Map<String, String> getReadiness() {
         Map<String, String> answer = new HashMap<>();
-        answer.put("LandscapeService", "OK");
+        answer.put(buildProperties.getName(), "OK");
         return answer;
     }
 }

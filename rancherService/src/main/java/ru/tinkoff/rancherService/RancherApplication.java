@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RancherServiceApplication {
+public class RancherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RancherServiceApplication.class, args);
+		SpringApplication.run(RancherApplication.class, args);
 	}
 
 }

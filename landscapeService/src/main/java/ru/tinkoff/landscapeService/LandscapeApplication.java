@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LandscapeServiceApplication {
+public class LandscapeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LandscapeServiceApplication.class, args);
+		SpringApplication.run(LandscapeApplication.class, args);
 	}
 
 }
