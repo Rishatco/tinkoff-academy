@@ -39,8 +39,6 @@ public class SystemService {
                     .build();
             connectedServicesStatus.get(getServiceMaskFromName(channelName)).add(status);
         }
-
-
         return  connectedServicesStatus;
     }
 
