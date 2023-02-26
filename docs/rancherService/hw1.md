@@ -4,7 +4,7 @@
 * Реализован endpoint `/readiness`, который при вызове возвращает имя сервиса и статус `OK` (`{"rancherServie": "OK"}`)
 * Реализован endpoint `l/iveness`, который при вызове возвращает `HTTP.OK`.
 * Добавлена поддержка метрик по адресу `/actuator/metrics`, которая выводит метрики в формате `prometheus`.
-* Добавлен endpoint `/actuator/intfo`, который выводит информацию о проекте.
+* Добавлен endpoint `/actuator/info`, который выводит информацию о проекте.
    ```json
    {
        "build":{
