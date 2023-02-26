@@ -29,7 +29,8 @@ public class StatusServer extends StatusServiceGrpc.StatusServiceImplBase {
     }
 
     /**
-     * @param request          empty gRPC request
+     *  Get service readiness state
+     * @param request empty gRPC request
      * @param responseObserver response observer for sending stream message
      */
     @Override

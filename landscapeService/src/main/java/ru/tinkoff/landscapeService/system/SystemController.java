@@ -1,6 +1,5 @@
 package ru.tinkoff.landscapeService.system;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +39,10 @@ public class SystemController {
         return answer;
     }
 
+    /**
+     *
+     * @return services name and services status
+     */
     @GetMapping("/statuses")
     public Map<String, List<Status>> getStatus(){
         return systemService.getStatus();

@@ -1,4 +1,4 @@
-package ru.tinkoff.handymanService.system;
+package ru.tinkoff.handymanService.status;
 
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
@@ -18,7 +18,7 @@ public class StatusServer extends StatusServiceGrpc.StatusServiceImplBase {
     /**
      * Get service build Version
      *
-     * @param request          empty gRPC request
+     * @param request empty gRPC request
      * @param responseObserver response observer for sending stream message
      */
     @Override
@@ -29,7 +29,8 @@ public class StatusServer extends StatusServiceGrpc.StatusServiceImplBase {
     }
 
     /**
-     * @param request          empty gRPC request
+     *  Get service readiness state
+     * @param request empty gRPC request
      * @param responseObserver response observer for sending stream message
      */
     @Override
