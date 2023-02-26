@@ -1,7 +1,17 @@
+buildscript {
+	ext {
+		protobufVersion = '3.19.1'
+		protobufPluginVersion = '0.8.18'
+		grpcVersion = '1.51.3'
+	}
+}
+
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.0.2'
+	id 'idea'
+	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id 'com.google.protobuf' version "${protobufPluginVersion}"
 }
 
 group = 'ru.tinkoff'
@@ -27,16 +37,40 @@ ext {
 }
 
 dependencies {
+	implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+	implementation "io.grpc:grpc-stub:${grpcVersion}"
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'io.micrometer:micrometer-registry-prometheus:1.10.3'
+	implementation 'net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
+	compileOnly 'jakarta.annotation:jakarta.annotation-api:1.3.5' // Java 9+ compatibility - Do NOT update to 2.0.0
+}
+
+protobuf {
+	protoc {
+		artifact = "com.google.protobuf:protoc:${protobufVersion}"
+	}
+	generatedFilesBaseDir = "$projectDir/src/generated"
+	clean {
+		delete generatedFilesBaseDir
+	}
+	plugins {
+		grpc {
+			artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+		}
+	}
+	generateProtoTasks {
+		all()*.plugins {
+			grpc {}
+		}
+	}
 }
 
 dependencyManagement {
@@ -47,4 +81,14 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// Optional
+idea {
+	module {
+		sourceDirs += file("src/generated/main/java")
+		sourceDirs += file("src/generated/main/grpc")
+		generatedSourceDirs += file("src/generated/main/java")
+		generatedSourceDirs += file("src/generated/main/grpc")
+	}
 }

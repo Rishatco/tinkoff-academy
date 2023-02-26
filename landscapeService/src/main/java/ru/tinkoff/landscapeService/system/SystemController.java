@@ -1,7 +1,7 @@
 package ru.tinkoff.landscapeService.system;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.info.BuildProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +16,7 @@ import java.util.Map;
 public class SystemController {
 
     private final BuildProperties buildProperties;
+    private final SystemService systemService;
 
     /**
      * check service liveness
@@ -36,5 +37,10 @@ public class SystemController {
         Map<String, String> answer = new HashMap<>();
         answer.put(buildProperties.getName(), "OK");
         return answer;
+    }
+
+    @GetMapping("/statuses")
+    public Map<String, Status[]> getStatus(){
+        return systemService.getStatus();
     }
 }
