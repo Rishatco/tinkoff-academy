@@ -11,7 +11,11 @@ import ru.tinkoff.proto.StatusServiceGrpc;
 import ru.tinkoff.proto.StatusServiceGrpc.StatusServiceBlockingStub;
 import ru.tinkoff.proto.VersionResponse;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
