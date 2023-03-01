@@ -23,7 +23,6 @@ public class SystemService {
 
     private final GrpcChannelsProperties grpcChannelsProperties;
     private final GrpcChannelFactory grpcChannelFactory;
-    private final String[] servicesNameMask = {"rancherService", "handymanService"};
 
     public Map<String, List<Status>> getStatus(){
         Map<String, List<Status>> connectedServicesStatus = initServicesInfoMap();
@@ -48,12 +47,12 @@ public class SystemService {
 
     private Map<String, List<Status>> initServicesInfoMap() {
         Map<String, List<Status>> connectedServicesStatus = new HashMap<>();
-        for (String serviceNameMask:  servicesNameMask)
+        for (String serviceNameMask:  SystemConst.servicesNameMask)
             connectedServicesStatus.put(serviceNameMask, new ArrayList<>());
         return  connectedServicesStatus;
     }
 
     private String getServiceMaskFromName(String channelName){
-        return Arrays.stream(servicesNameMask).filter(channelName::contains).findFirst().orElse("UnknownService");
+        return Arrays.stream(SystemConst.servicesNameMask).filter(channelName::contains).findFirst().orElse("UnknownService");
     }
 }
