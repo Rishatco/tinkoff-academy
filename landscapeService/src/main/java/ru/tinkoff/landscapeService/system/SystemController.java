@@ -34,9 +34,8 @@ public class SystemController {
      * @return service name and service status
      */
     @GetMapping("/readiness")
-    public Map<String, String> getReadiness() {
-        Map<String, String> answer = new HashMap<>();
-        answer.put(buildProperties.getName(), "OK");
+    public Map.Entry<String, String> getReadiness() {
+        Map.Entry<String, String> answer = Map.entry(buildProperties.getName(), "OK");
         return answer;
     }
 
