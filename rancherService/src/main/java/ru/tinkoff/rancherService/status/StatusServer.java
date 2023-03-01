@@ -23,20 +23,36 @@ public class StatusServer extends StatusServiceGrpc.StatusServiceImplBase {
      */
     @Override
     public void getVersion(Empty request, StreamObserver<VersionResponse> responseObserver) {
-        VersionResponse response = VersionResponse.newBuilder().setVersion(buildProperties.getVersion()).setArtifact(buildProperties.getArtifact()).setGroup(buildProperties.getGroup()).setName(buildProperties.getName()).build();
+        VersionResponse response = getServiceVersion();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
     /**
-     *  Get service readiness state
-     * @param request empty gRPC request
+     * Get service readiness state
+     *
+     * @param request          empty gRPC request
      * @param responseObserver response observer for sending stream message
      */
     @Override
     public void getReadiness(Empty request, StreamObserver<ReadinessResponse> responseObserver) {
-        ReadinessResponse response = ReadinessResponse.newBuilder().setStatus("OK").build();
+        ReadinessResponse response = getServiceStatus();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
+    }
+
+    private VersionResponse getServiceVersion() {
+        return VersionResponse.newBuilder()
+                .setVersion(buildProperties.getVersion())
+                .setArtifact(buildProperties.getArtifact())
+                .setGroup(buildProperties.getGroup())
+                .setName(buildProperties.getName())
+                .build();
+    }
+
+    private ReadinessResponse getServiceStatus() {
+        return ReadinessResponse.newBuilder()
+                .setStatus("OK")
+                .build();
     }
 }
