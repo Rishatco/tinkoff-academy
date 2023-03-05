@@ -14,12 +14,13 @@ management:
 grpc:
   client:
     rancherService:
-      address: 'static://127.0.0.1:8090'
+      address: ${RANCHER_GRPC_SERVER_ADDRESS:localhost:8090}
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext
     handymanService:
-      address: 'static://127.0.0.1:8091'
+      address: ${HANDYMAN_GRPC-SERVER_ADDRESS:localhost:8091}
       enableKeepAlive: true
       keepAliveWithoutCalls: true
       negotiationType: plaintext
+

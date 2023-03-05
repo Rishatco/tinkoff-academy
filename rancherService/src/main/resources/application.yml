@@ -13,4 +13,4 @@ management:
         enabled: true
 grpc:
   server:
-    port: 8090
+    port: ${GRPC_SERVER_PORT:8090}
