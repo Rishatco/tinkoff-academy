@@ -1,5 +1,6 @@
 package ru.tinkoff.landscapeService.system;
 
+import ch.qos.logback.core.status.StatusUtil;
 import com.google.protobuf.Empty;
 import io.grpc.Channel;
 import lombok.RequiredArgsConstructor;
@@ -24,23 +25,18 @@ public class SystemService {
     private final GrpcChannelsProperties grpcChannelsProperties;
     private final GrpcChannelFactory grpcChannelFactory;
 
+
+    /**
+     *
+     * @return Map with services status
+     */
     public Map<String, List<Status>> getStatus(){
         Map<String, List<Status>> connectedServicesStatus = initServicesInfoMap();
         for(String channelName: grpcChannelsProperties.getClient().keySet()) {
-
             Channel serviceChannel = grpcChannelFactory.createChannel(channelName);
             StatusServiceBlockingStub statusServiceBlockingStub = StatusServiceGrpc.newBlockingStub(serviceChannel);
-            VersionResponse versionResponse = statusServiceBlockingStub.getVersion(Empty.getDefaultInstance());
-            ReadinessResponse readinessResponse = statusServiceBlockingStub.getReadiness(Empty.getDefaultInstance());
-
-            Status status = Status.builder().group(versionResponse.getGroup())
-                    .name(versionResponse.getName())
-                    .status(readinessResponse.getStatus())
-                    .artifact(versionResponse.getArtifact())
-                    .version(versionResponse.getVersion())
-                    .host(serviceChannel.authority())
-                    .build();
-            connectedServicesStatus.get(getServiceMaskFromName(channelName)).add(status);
+            Status serverStatus = getServiceStatus(statusServiceBlockingStub);
+            connectedServicesStatus.get(getServiceMaskFromName(channelName)).add(serverStatus);
         }
         return  connectedServicesStatus;
     }
@@ -54,5 +50,19 @@ public class SystemService {
 
     private String getServiceMaskFromName(String channelName){
         return Arrays.stream(SystemConst.servicesNameMask).filter(channelName::contains).findFirst().orElse("UnknownService");
+    }
+
+    private Status getServiceStatus(StatusServiceBlockingStub statusServiceBlockingStub){
+        VersionResponse versionResponse = statusServiceBlockingStub.getVersion(Empty.getDefaultInstance());
+        ReadinessResponse readinessResponse = statusServiceBlockingStub.getReadiness(Empty.getDefaultInstance());
+
+        Status status = Status.builder().group(versionResponse.getGroup())
+                .name(versionResponse.getName())
+                .status(readinessResponse.getStatus())
+                .artifact(versionResponse.getArtifact())
+                .version(versionResponse.getVersion())
+                .host(statusServiceBlockingStub.getChannel().authority())
+                .build();
+        return  status;
     }
 }
