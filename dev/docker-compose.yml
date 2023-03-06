@@ -8,7 +8,7 @@ services:
   landscape-service:
     container_name: landscape-service
     build:
-      context: landscapeService
+      context: ../landscapeService
       dockerfile: Dockerfile
     image: landscape-service:latest
     ports:
@@ -16,8 +16,8 @@ services:
     networks:
       - internal
     environment:
-      HANDYMAN_GRPC_SERVER_ADDRESS:  http://handyman-service:8091
-      RANCHER_GRPC_SERVER_ADDRESS: http://rancher-service:8090
+      HANDYMAN_GRPC_SERVER_ADDRESS:  static://handyman-service:8091
+      RANCHER_GRPC_SERVER_ADDRESS: static://rancher-service:8090
     depends_on:
       - handyman-service
       - rancher-service
@@ -26,7 +26,7 @@ services:
   handyman-service:
     container_name: handyman-service
     build:
-      context: handymanService
+      context: ../handymanService
       dockerfile: Dockerfile
     image: handymanservice:latest
     ports:
@@ -39,7 +39,7 @@ services:
   rancher-service:
     container_name: rancher-service
     build:
-      context: rancherService
+      context: ../rancherService
       dockerfile: Dockerfile
     image: rancher-service:latest
     ports:
