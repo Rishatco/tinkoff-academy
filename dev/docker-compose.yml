@@ -16,8 +16,8 @@ services:
     networks:
       - internal
     environment:
-      HANDYMAN_GRPC_SERVER_ADDRESS:  handyman-service:8091
-      RANCHER_GRPC_SERVER_ADDRESS: rancher-service:8090
+      HANDYMAN_GRPC_SERVER_ADDRESS:  http://handyman-service:8091
+      RANCHER_GRPC_SERVER_ADDRESS: http://rancher-service:8090
     depends_on:
       - handyman-service
       - rancher-service
