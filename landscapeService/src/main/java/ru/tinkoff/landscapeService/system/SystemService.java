@@ -18,17 +18,13 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class SystemService {
 
     private final GrpcChannelsProperties grpcChannelsProperties;
     private final GrpcChannelFactory grpcChannelFactory;
     private final Map<String, StatusServiceBlockingStub> blockingStubMap; // мап, где хранится имя сервиса и stub
 
-    public SystemService(GrpcChannelsProperties grpcChannelsProperties, GrpcChannelFactory grpcChannelFactory) {
-        this.grpcChannelsProperties = grpcChannelsProperties;
-        this.grpcChannelFactory = grpcChannelFactory;
-        this.blockingStubMap = new HashMap<>();
-    }
 
     /**
      *
@@ -37,6 +33,8 @@ public class SystemService {
     public Map<String, List<Status>> getStatus(){
         Map<String, List<Status>> connectedServicesStatus = initServicesInfoMap();
         for(String channelName: grpcChannelsProperties.getClient().keySet()) {
+            if (channelName.equals(GrpcChannelsProperties.GLOBAL_PROPERTIES_KEY)) // При повторном вызове функции в keySet появляется канал с именнем GLOBAL
+                continue;
             StatusServiceBlockingStub statusServiceBlockingStub = getBlockingStub(channelName);
             Status serverStatus = getServiceStatus(statusServiceBlockingStub);
             connectedServicesStatus.get(getServiceMaskFromName(channelName)).add(serverStatus);
