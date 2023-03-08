@@ -18,12 +18,17 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class SystemService {
 
     private final GrpcChannelsProperties grpcChannelsProperties;
     private final GrpcChannelFactory grpcChannelFactory;
+    private final Map<String, StatusServiceBlockingStub> blockingStubMap; // мап, где хранится имя сервиса и stub
 
+    public SystemService(GrpcChannelsProperties grpcChannelsProperties, GrpcChannelFactory grpcChannelFactory) {
+        this.grpcChannelsProperties = grpcChannelsProperties;
+        this.grpcChannelFactory = grpcChannelFactory;
+        this.blockingStubMap = new HashMap<>();
+    }
 
     /**
      *
@@ -32,8 +37,7 @@ public class SystemService {
     public Map<String, List<Status>> getStatus(){
         Map<String, List<Status>> connectedServicesStatus = initServicesInfoMap();
         for(String channelName: grpcChannelsProperties.getClient().keySet()) {
-            Channel serviceChannel = grpcChannelFactory.createChannel(channelName);
-            StatusServiceBlockingStub statusServiceBlockingStub = StatusServiceGrpc.newBlockingStub(serviceChannel);
+            StatusServiceBlockingStub statusServiceBlockingStub = getBlockingStub(channelName);
             Status serverStatus = getServiceStatus(statusServiceBlockingStub);
             connectedServicesStatus.get(getServiceMaskFromName(channelName)).add(serverStatus);
         }
@@ -63,5 +67,12 @@ public class SystemService {
                 .host(statusServiceBlockingStub.getChannel().authority())
                 .build();
         return  status;
+    }
+    private StatusServiceBlockingStub getBlockingStub(String channelName){
+        if (!blockingStubMap.containsKey(channelName)) {
+            Channel serviceChannel = grpcChannelFactory.createChannel(channelName);
+            blockingStubMap.put(channelName, StatusServiceGrpc.newBlockingStub(serviceChannel));
+        }
+        return blockingStubMap.get(channelName);
     }
 }
