@@ -11,7 +11,7 @@
            "artifact":"demo",
            "name":"demo",
            "time":"2022-09-29T12:39:54.402Z",
-           "version":"0.0.42-SNAPSHOTa",
+           "version":"0.0.42-SNAPSHOT",
            "group":"com.example"
        }
    }

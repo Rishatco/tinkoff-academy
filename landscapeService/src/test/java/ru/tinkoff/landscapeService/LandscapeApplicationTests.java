@@ -22,6 +22,7 @@ class LandscapeApplicationTests {
 	@Autowired
 	private BuildProperties buildProperties;
 
+
 	@Test
 	void contextLoads() {
 	}

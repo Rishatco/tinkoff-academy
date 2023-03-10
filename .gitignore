@@ -178,7 +178,6 @@ gradle-app.setting
 /.idea/modules/handymanService.main.iml
 /.idea/modules/landscapeService.main.iml
 /.idea/modules/rancherService.main.iml
-
 /landscapeService/src/generated/
 /handymanService/src/generated/
 /rancherService/src/generated/
