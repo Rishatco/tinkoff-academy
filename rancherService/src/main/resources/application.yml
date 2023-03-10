@@ -10,4 +10,6 @@ management:
   metrics:
     export:
       prometheus:
-        enabled: true
+grpc:
+  server:
+    port: 8090

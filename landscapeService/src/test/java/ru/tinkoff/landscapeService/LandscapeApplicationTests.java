@@ -2,6 +2,7 @@ package ru.tinkoff.landscapeService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,6 +19,9 @@ class LandscapeApplicationTests {
 
 	@Autowired
 	private MockMvc mockMvc;
+	@Autowired
+	private BuildProperties buildProperties;
+
 
 	@Test
 	void contextLoads() {
