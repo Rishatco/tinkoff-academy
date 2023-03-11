@@ -3,10 +3,11 @@ WORKDIR /workspace/app
 
 COPY . /workspace/app
 RUN apk update && apk add gcompat
-RUN gradle clean build
+RUN gradle bootJar
 
 FROM amazoncorretto:17-alpine-jdk
-COPY --from=build /workspace/app/build/libs/*.jar /app.jar
+COPY --from=build /workspace/app/build/libs/*.jar /HandymanService.jar
+VOLUME /tmp
 EXPOSE 8080
 EXPOSE 8091
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "/HandymanService.jar"]
