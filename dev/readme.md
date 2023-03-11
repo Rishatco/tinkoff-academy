@@ -1,6 +1,5 @@
 ## handymanService
 1) перейти в директорию сервиса.
-2) выполнить команду `./gradlew bootJar` 
 3) выполнить команду `docker build --tag=handyman-service:latest .`
 ![buildHandymanService.png](docker_photo/buildHandymanService.png)
 4) выполнить команду `docker run  -p 8080:8080 -p 8091:8091 handyman-service`
@@ -9,7 +8,6 @@
 
 ## landscapeService
 1) перейти в директорию сервиса.
-2) выполнить команду `./gradlew bootJar`
 3) выполнить команду `docker build --tag=landscape-service:latest .`
 ![buildLandscapeService.png](docker_photo/buildLandscapeService.png)
 4) выполнить команду `docker run  -p 8081:8081 landscape-service`
@@ -18,7 +16,6 @@
 
 ## rancherService
 1) перейти в директорию сервиса.
-2) выполнить команду `./gradlew bootJar`
 3) выполнить команду `docker build --tag=rancher-service:latest .`
 ![buildRancherService.png](docker_photo/buildRancherService.png)
 4) выполнить команду `docker run  -p 8082:8082 -p 8090:8090 rancher-service`
