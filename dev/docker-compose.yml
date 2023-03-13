@@ -21,6 +21,7 @@ services:
     depends_on:
       - handyman-service
       - rancher-service
+      - postgres
     restart: always
 
   handyman-service:
@@ -34,6 +35,8 @@ services:
       - 8091:8091
     networks:
       - internal
+    depends_on:
+      - postgres
     restart: always
 
   rancher-service:
@@ -47,6 +50,8 @@ services:
       - 8090:8090
     networks:
       - internal
+    depends_on:
+      - postgres
     restart: always
 
   postgres:
