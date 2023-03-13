@@ -7,7 +7,6 @@ RUN gradle bootJar
 
 FROM amazoncorretto:17-alpine-jdk
 COPY --from=build /workspace/app/build/libs/*.jar /HandymanService.jar
-VOLUME /tmp
 EXPOSE 8080
 EXPOSE 8091
 ENTRYPOINT ["java", "-jar", "/HandymanService.jar"]

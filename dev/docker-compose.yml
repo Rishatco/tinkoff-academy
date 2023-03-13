@@ -18,6 +18,9 @@ services:
     environment:
       HANDYMAN_GRPC_SERVER_ADDRESS:  static://handyman-service:8091
       RANCHER_GRPC_SERVER_ADDRESS: static://rancher-service:8090
+      DB_USERNAME: postgres
+      DB_PASSWORD: 1234
+      DB_URL: jdbc:postgresql://postgres:5432/postgres?currentSchema=public
     depends_on:
       - handyman-service
       - rancher-service
@@ -28,13 +31,17 @@ services:
     build:
       context: ../handymanService
       dockerfile: Dockerfile
-    image: handymanservice:latest
+    image: handyman-service:latest
     ports:
       - 8080:8080
       - 8091:8091
     networks:
       - internal
     restart: always
+    environment:
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=1234
+      - DB_URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
 
   rancher-service:
     container_name: rancher-service
@@ -48,11 +55,21 @@ services:
     networks:
       - internal
     restart: always
+    environment:
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=1234
+      - DB_URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
 
   postgres:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: example
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/
+    ports:
+          - "5432:5432"
 
   prometheus:
     image: bitnami/prometheus

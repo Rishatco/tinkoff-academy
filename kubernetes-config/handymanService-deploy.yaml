@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: handyman-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: handyman-service
+  template:
+    metadata:
+      labels:
+        app: handyman-service
+    spec:
+      containers:
+        - image: sagidullinrr/handyman-service:latest
+          name: handyman-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+            - containerPort: 8091
+          env:
+            - name: "DB_USERNAME"
+              value: "postgres"
+            - name: "DB_PASSWORD"
+              value: "1234"
+            - name: "DB_URL"
+              value: "jdbc:postgresql://postgres:5432/postgres?currentSchema=public"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: handyman-service
+spec:
+  ports:
+      - port: 8080
+        targetPort: 8080
+        name: rest
+      - port: 8091
+        targetPort: 8091
+        name: grpc
+  type: LoadBalancer
+  selector:
+    app: handyman-service

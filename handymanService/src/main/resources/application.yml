@@ -14,3 +14,8 @@ management:
 grpc:
   server:
     port: 8091
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
