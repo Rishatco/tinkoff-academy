@@ -24,6 +24,7 @@ services:
     depends_on:
       - handyman-service
       - rancher-service
+      - postgres
     restart: always
 
   handyman-service:
@@ -42,6 +43,9 @@ services:
       - DB_USERNAME=postgres
       - DB_PASSWORD=1234
       - DB_URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
+    depends_on:
+      - postgres
+    restart: always
 
   rancher-service:
     container_name: rancher-service
@@ -59,6 +63,9 @@ services:
       - DB_USERNAME=postgres
       - DB_PASSWORD=1234
       - DB_URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
+    depends_on:
+      - postgres
+    restart: always
 
   postgres:
     image: postgres

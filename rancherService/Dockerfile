@@ -7,6 +7,7 @@ RUN gradle bootJar
 
 FROM amazoncorretto:17-alpine-jdk
 COPY --from=build /workspace/app/build/libs/RancherService-0.3.1-SNAPSHOT.jar /RancherService.jar
+
 EXPOSE 8082
 EXPOSE 8090
 ENTRYPOINT ["java", "-jar", "/RancherService.jar"]
