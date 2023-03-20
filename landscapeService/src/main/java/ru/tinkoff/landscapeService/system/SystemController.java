@@ -46,4 +46,5 @@ public class SystemController {
     public Map<String, List<Status>> getStatus(){
         return systemService.getStatus();
     }
+
 }

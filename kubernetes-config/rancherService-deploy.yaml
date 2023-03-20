@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rancher-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rancher-service
+  template:
+    metadata:
+      labels:
+        app: rancher-service
+    spec:
+      containers:
+        - image: sagidullinrr/rancher-service:latest
+          name: rancher-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
+            - containerPort: 8090
+          env:
+            - name: "DB_USERNAME"
+              value: "postgres"
+            - name: "DB_PASSWORD"
+              value: "1234"
+            - name: "DB_URL"
+              value: "jdbc:postgresql://postgres:5432/postgres?currentSchema=public"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rancher-service
+spec:
+  ports:
+    - port: 8082
+      targetPort: 8082
+      name: rest
+    - port: 8090
+      targetPort: 8090
+      name: grpc
+  type: LoadBalancer
+  selector:
+    app: rancher-service

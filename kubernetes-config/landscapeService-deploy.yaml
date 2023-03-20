@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: landscape-service
+spec:
+  selector:
+    matchLabels:
+      app: landscape-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: landscape-service
+    spec:
+      containers:
+        - name: landscape-service
+          image: sagidullinrr/landscape-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: HANDYMAN_GRPC_SERVER_ADDRESS
+              value:  static://handyman-service:8091
+            - name: RANCHER_GRPC_SERVER_ADDRESS
+              value: static://rancher-service:8090
+            - name: "DB_USERNAME"
+              value: "postgres"
+            - name: "DB_PASSWORD"
+              value: "1234"
+            - name: "DB_URL"
+              value: "jdbc:postgresql://postgres:5432/postgres?currentSchema=public"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: landscape-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+  type: LoadBalancer
+  selector:
+    app: landscape-service

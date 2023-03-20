@@ -1,6 +1,5 @@
 ## HandymanService
 
-
 ### Проделанная работа в рамках hw1
 * Реализован endpoint `/readiness`, который при вызове возвращает имя сервиса и статус `OK` (`{"handymanServie": "OK"}`)
 * Реализован endpoint `/liveness`, который при вызове возвращает `HTTP.OK`.

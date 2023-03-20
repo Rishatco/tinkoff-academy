@@ -25,3 +25,10 @@
 ## Запуск всего сразу
 1) запусить команду `docker-compose up --build`
 ![resultDocker.png](docker_photo/resultDocker.png)
+
+## Запуск через minicube 
+1) выполнить команду `minikube start`
+2) выполнить команду `kubectl apply -f .\kubernetes-config\`
+3) выполнить команду `minikube service service-name --url`, где `service-name` имя необходимого сервиса.
+4) По окончанию работ выполнить комадну `kubectl delete all --all`.
+5) Остановить minikube командой `minikube stop`

@@ -13,5 +13,9 @@ management:
         enabled: true
 grpc:
   server:
-    port: ${GRPC_SERVER_PORT:8091}
-
+    port: 8091
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
