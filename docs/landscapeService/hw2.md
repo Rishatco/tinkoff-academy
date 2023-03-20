@@ -1,4 +1,5 @@
-## handymanService
+## LandscapeService
+
 
 ### Проделанная работа в рамках hw2
 * реализован gRPC клиент для получения данных от серверов rancherService и handymanService.

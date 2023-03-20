@@ -1,4 +1,5 @@
-## rancherService
+## RancherService
+
 
 ### Проделанная работа в рамках hw1
 * Реализован endpoint `/readiness`, который при вызове возвращает имя сервиса и статус `OK` (`{"rancherServie": "OK"}`)

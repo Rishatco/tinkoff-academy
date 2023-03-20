@@ -1,0 +1,71 @@
+version: '3.9'
+
+networks:
+  internal:
+    driver: bridge
+
+services:
+  landscape-service:
+    container_name: landscape-service
+    build:
+      context: ../landscapeService
+      dockerfile: Dockerfile
+    image: landscape-service:latest
+    ports:
+      - 8081:8081
+    networks:
+      - internal
+    environment:
+      HANDYMAN_GRPC_SERVER_ADDRESS:  static://handyman-service:8091
+      RANCHER_GRPC_SERVER_ADDRESS: static://rancher-service:8090
+    depends_on:
+      - handyman-service
+      - rancher-service
+      - postgres
+    restart: always
+
+  handyman-service:
+    container_name: handyman-service
+    build:
+      context: ../handymanService
+      dockerfile: Dockerfile
+    image: handymanservice:latest
+    ports:
+      - 8080:8080
+      - 8091:8091
+    networks:
+      - internal
+    depends_on:
+      - postgres
+    restart: always
+
+  rancher-service:
+    container_name: rancher-service
+    build:
+      context: ../rancherService
+      dockerfile: Dockerfile
+    image: rancher-service:latest
+    ports:
+      - 8082:8082
+      - 8090:8090
+    networks:
+      - internal
+    depends_on:
+      - postgres
+    restart: always
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+
+  prometheus:
+    image: bitnami/prometheus
+
+  grafana:
+      image: grafana/grafana
+      ports:
+        - "3000:3000"
+
+
+

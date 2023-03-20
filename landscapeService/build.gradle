@@ -15,7 +15,7 @@ plugins {
 }
 
 group = 'ru.tinkoff'
-version = '0.1.1-SNAPSHOT'
+version = '0.2.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
@@ -91,4 +91,4 @@ idea {
 		generatedSourceDirs += file("src/generated/main/java")
 		generatedSourceDirs += file("src/generated/main/grpc")
 	}
-}
+}  
