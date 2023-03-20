@@ -23,6 +23,7 @@ public class SystemService {
 
     private final GrpcChannelsProperties grpcChannelsProperties;
     private final GrpcChannelFactory grpcChannelFactory;
+    private final Map<String, StatusServiceBlockingStub> blockingStubMap; // мап, где хранится имя сервиса и stub
 
 
     /**
@@ -32,8 +33,9 @@ public class SystemService {
     public Map<String, List<Status>> getStatus(){
         Map<String, List<Status>> connectedServicesStatus = initServicesInfoMap();
         for(String channelName: grpcChannelsProperties.getClient().keySet()) {
-            Channel serviceChannel = grpcChannelFactory.createChannel(channelName);
-            StatusServiceBlockingStub statusServiceBlockingStub = StatusServiceGrpc.newBlockingStub(serviceChannel);
+            if (channelName.equals(GrpcChannelsProperties.GLOBAL_PROPERTIES_KEY)) // При повторном вызове функции в keySet появляется канал с именнем GLOBAL
+                continue;
+            StatusServiceBlockingStub statusServiceBlockingStub = getBlockingStub(channelName);
             Status serverStatus = getServiceStatus(statusServiceBlockingStub);
             connectedServicesStatus.get(getServiceMaskFromName(channelName)).add(serverStatus);
         }
@@ -63,5 +65,12 @@ public class SystemService {
                 .host(statusServiceBlockingStub.getChannel().authority())
                 .build();
         return  status;
+    }
+    private StatusServiceBlockingStub getBlockingStub(String channelName){
+        if (!blockingStubMap.containsKey(channelName)) {
+            Channel serviceChannel = grpcChannelFactory.createChannel(channelName);
+            blockingStubMap.put(channelName, StatusServiceGrpc.newBlockingStub(serviceChannel));
+        }
+        return blockingStubMap.get(channelName);
     }
 }

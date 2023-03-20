@@ -1,5 +1,6 @@
 ## LandscapeService
 
+
 ### Проделанная работа в рамках hw2
 * реализован gRPC клиент для получения данных от серверов rancherService и handymanService.
 * реализован endpoint `/system/statuses`, который возвдращет данные о всех подключенных сервисах.
