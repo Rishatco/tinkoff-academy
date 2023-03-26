@@ -182,3 +182,13 @@ gradle-app.setting
 /landscapeService/src/generated/
 /handymanService/src/generated/
 /rancherService/src/generated/
+/.idea/encodings.xml
+/fake_data/.idea/.gitignore
+/fake_data/.idea/encodings.xml
+/fake_data/.idea/fake_data.iml
+/fake_data/.idea/inspectionProfiles/profiles_settings.xml
+/fake_data/.idea/misc.xml
+/fake_data/.idea/modules.xml
+/fake_data/.idea/vcs.xml
+/fake_data/main.py
+/fake_data/stabina.sql
