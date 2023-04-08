@@ -38,7 +38,6 @@ services:
       - 8091:8091
     networks:
       - internal
-    restart: always
     environment:
       - DB_USERNAME=postgres
       - DB_PASSWORD=1234
@@ -58,7 +57,6 @@ services:
       - 8090:8090
     networks:
       - internal
-    restart: always
     environment:
       - DB_USERNAME=postgres
       - DB_PASSWORD=1234
