@@ -192,3 +192,5 @@ gradle-app.setting
 /fake_data/.idea/vcs.xml
 /fake_data/main.py
 /fake_data/stabina.sql
+/landscapeService/src/main/resources/liquibase.properties
+/landscapeService/src/main/resources/liquibase.properties
