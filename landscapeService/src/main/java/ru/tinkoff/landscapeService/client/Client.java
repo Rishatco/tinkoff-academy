@@ -1,6 +1,7 @@
 package ru.tinkoff.landscapeService.client;
 
 import lombok.*;
+import ru.tinkoff.landscapeService.clientType.ClientType;
 
 
 import javax.persistence.*;
@@ -28,15 +29,17 @@ public class Client {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "client_type_v2")
+    @ManyToOne
+    @JoinColumn(name = "client_type_v2")
     private ClientType clientType;
 
-    @Column(name = "creationDate")
+    @Column(name = "creationdate")
     private LocalDateTime creationDate;
 
-    @Column(name = "updatingTime")
+    @Column(name = "updatingtime")
     private LocalDateTime updatingTime;
-
+    private Double latitude;
+    private Double longitude;
 
     @PrePersist
     public void prePersist(){
@@ -48,4 +51,6 @@ public class Client {
     public void PreUpdate(){
         this.updatingTime = LocalDateTime.now();
     }
+
+
 }
