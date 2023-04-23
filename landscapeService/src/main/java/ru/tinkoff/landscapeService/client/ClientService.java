@@ -20,7 +20,6 @@ public class ClientService {
     private final ClientTypeService clientTypeService;
 
     /**
-     *
      * @param id - user id
      * @return Client with given id
      */
@@ -31,7 +30,6 @@ public class ClientService {
     }
 
     /**
-     *
      * @param offset - page's number
      * @param limit - client count on one page
      * @return page with clients
