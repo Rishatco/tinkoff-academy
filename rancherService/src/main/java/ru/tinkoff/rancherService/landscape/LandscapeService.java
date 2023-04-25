@@ -1,12 +1,11 @@
-package ru.tinkoff.handymanService.landscape;
+package ru.tinkoff.rancherService.landscape;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import ru.tinkoff.handymanService.landscape.Client.Client;
-import ru.tinkoff.handymanService.landscape.Client.ClientDTO;
-
+import ru.tinkoff.rancherService.landscape.Client.Client;
+import ru.tinkoff.rancherService.landscape.Client.ClientDTO;
 import java.util.UUID;
 
 @Service
@@ -18,11 +17,12 @@ public class LandscapeService {
     private final LandscapeClient landscapeClient;
 
     /**
-     *  Save client to DB
+     * Save client to DB
+     *
      * @param clientDTO client's data
      * @return Client
      */
-    public Client save(ClientDTO clientDTO){
+    public Client save(ClientDTO clientDTO) {
         try {
             return landscapeClient.create(clientDTO);
         } catch (Exception e) {
@@ -33,11 +33,12 @@ public class LandscapeService {
 
     /**
      * update client
-     * @param id client id
+     *
+     * @param id        client id
      * @param clientDTO new client's data
      * @return updated Client
      */
-    public Client update(UUID id, ClientDTO clientDTO){
+    public Client update(UUID id, ClientDTO clientDTO) {
         try {
             return landscapeClient.update(id, clientDTO);
         } catch (Exception e) {
@@ -47,10 +48,11 @@ public class LandscapeService {
 
     /**
      * get client by id
+     *
      * @param id client Id
      * @return client
      */
-    public Client getById(UUID id){
+    public Client getById(UUID id) {
         try {
             return landscapeClient.getById(id);
         } catch (Exception e) {
@@ -60,14 +62,14 @@ public class LandscapeService {
 
     /**
      * Delete client
+     *
      * @param id - client id
      */
-    public void delete(UUID id){
+    public void delete(UUID id) {
         try {
             landscapeClient.delete(id);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ERROR_MESSAGE);
         }
     }
-
 }

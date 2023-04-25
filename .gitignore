@@ -194,3 +194,4 @@ gradle-app.setting
 /fake_data/stabina.sql
 /landscapeService/src/main/resources/liquibase.properties
 /landscapeService/src/main/resources/liquibase.properties
+/dev/mongo-data/

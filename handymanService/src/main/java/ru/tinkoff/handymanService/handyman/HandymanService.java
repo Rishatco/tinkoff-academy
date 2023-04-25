@@ -1,6 +1,8 @@
 package ru.tinkoff.handymanService.handyman;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HandymanService {
 
-    private static final long TYPE_ID = 2;
+    private static final long HANDYMAN_TYPE_ID = 1;
 
     private final HandymanRepository handymanRepository;
     private final LandscapeService landscapeService;
@@ -52,8 +54,11 @@ public class HandymanService {
     /**
      * @return all Handyman from bd
      */
-    public List<Handyman> getAll(){
-        return handymanRepository.findAll();
+    public List<Profile> getAll(Integer page, Integer size){
+        Page<Handyman> handymen = handymanRepository.findAll(PageRequest.of(page, size));
+        return  handymen.stream()
+                .map(handyman -> new Profile(handyman, landscapeService.getById(handyman.getSubId())))
+                .toList();
     }
 
     /**
@@ -76,7 +81,10 @@ public class HandymanService {
         return new Profile(handyman, updatedClient);
     }
 
-
+    /**
+     *  Delete Handyman
+     * @param id
+     */
     public void delete(String id){
         Handyman handyman = handymanRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "cannot find handyman with given id" + id));
@@ -86,7 +94,7 @@ public class HandymanService {
 
     private ClientDTO convertHandymanDTOtoClient(HandymanDTO handymanDTO){
         ClientDTO creatingClient = new ClientDTO();
-        creatingClient.setClientType(TYPE_ID);
+        creatingClient.setClientType(HANDYMAN_TYPE_ID);
         creatingClient.setLatitude(handymanDTO.getLatitude());
         creatingClient.setPhone(handymanDTO.getPhone());
         creatingClient.setEmail(handymanDTO.getEmail());

@@ -3,7 +3,6 @@ package ru.tinkoff.landscapeService.client;
 import lombok.*;
 import ru.tinkoff.landscapeService.clientType.ClientType;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;

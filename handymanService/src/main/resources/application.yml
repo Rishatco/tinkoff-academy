@@ -18,10 +18,11 @@ spring:
   data:
     mongodb:
       uri: ${MONGO_DB_URI}
+      username: root
+      password: rootpassword
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
 application:
   landscape:
-    rest:
-      url: ${LANDSCAPE_URL}
+    url: ${LANDSCAPE_URL}

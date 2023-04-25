@@ -22,9 +22,9 @@ public class ClientController {
 
     @GetMapping
     public Page<Client> getAll(
-            @RequestParam(value = "offset", defaultValue = "0") @Min(0) Integer offset,
-            @RequestParam(value = "limit", defaultValue = "20") @Min(1) @Max(100) Integer limit){
-        return clientService.getAll(offset, limit);
+            @RequestParam(value = "offset", defaultValue = "0") @Min(0) Integer page,
+            @RequestParam(value = "limit", defaultValue = "20") @Min(1) @Max(100) Integer size){
+        return clientService.getAll(page, size);
     }
 
     @PostMapping
@@ -36,6 +36,4 @@ public class ClientController {
     public Client update(@PathVariable UUID id, @RequestBody ClientDTO clientDTO){
         return clientService.update(clientDTO, id);
     }
-
-
 }
