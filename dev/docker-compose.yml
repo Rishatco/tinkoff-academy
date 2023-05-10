@@ -42,7 +42,7 @@ services:
       - MONGO_DB_URI=mongodb://mongodb:27017/handyman
       - LANDSCAPE_URL=http://landscape-service:8081/
     depends_on:
-      - mongo
+      - mongodb
     restart: always
 
   rancher-service:
@@ -60,7 +60,7 @@ services:
       - MONGO_DB_URI=mongodb://mongodb:27017/rancher
       - LANDSCAPE_URL=http://landscape-service:8081/
     depends_on:
-      - mongo
+      - mongodb
     restart: always
 
   postgres:
@@ -78,11 +78,27 @@ services:
 
   prometheus:
     image: bitnami/prometheus
+    volumes:
+      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus_data:/opt/bitnami/prometheus/data
+    networks:
+      - internal
+    ports:
+      - "9090:9090"
 
   grafana:
       image: grafana/grafana
       ports:
         - "3000:3000"
+      volumes:
+        - ./grafana-data:/var/lib/grafana
+      environment:
+        - GF_SECURITY_ADMIN_USER=admin
+        - GF_SECURITY_ADMIN_PASSWORD=admin
+      networks:
+        - internal
+      depends_on:
+        - prometheus
 
   mongodb:
     image: mongo
