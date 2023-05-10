@@ -39,11 +39,10 @@ services:
     networks:
       - internal
     environment:
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=1234
-      - DB_URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
+      - MONGO_DB_URI=mongodb://mongodb:27017/handyman
+      - LANDSCAPE_URL=http://landscape-service:8081/
     depends_on:
-      - postgres
+      - mongodb
     restart: always
 
   rancher-service:
@@ -58,11 +57,10 @@ services:
     networks:
       - internal
     environment:
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=1234
-      - DB_URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
+      - MONGO_DB_URI=mongodb://mongodb:27017/rancher
+      - LANDSCAPE_URL=http://landscape-service:8081/
     depends_on:
-      - postgres
+      - mongodb
     restart: always
 
   postgres:
@@ -75,14 +73,39 @@ services:
       - ./postgres-data:/var/lib/postgresql/
     ports:
           - "5432:5432"
+    networks:
+      - internal
 
   prometheus:
     image: bitnami/prometheus
+    volumes:
+      - ../monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus_data:/opt/bitnami/prometheus/data
+    networks:
+      - internal
+    ports:
+      - "9090:9090"
 
   grafana:
       image: grafana/grafana
       ports:
         - "3000:3000"
+      volumes:
+        - ./grafana-data:/var/lib/grafana
+      environment:
+        - GF_SECURITY_ADMIN_USER=admin
+        - GF_SECURITY_ADMIN_PASSWORD=admin
+      networks:
+        - internal
+      depends_on:
+        - prometheus
 
-
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-data/:/data/db
+    networks:
+      - internal
 
