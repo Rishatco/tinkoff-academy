@@ -1,4 +1,4 @@
-package ru.tinkoff.rancherService.landscape.Client;
+package ru.tinkoff.rancherService.landscape.client;
 
 import lombok.Builder;
 import lombok.Data;

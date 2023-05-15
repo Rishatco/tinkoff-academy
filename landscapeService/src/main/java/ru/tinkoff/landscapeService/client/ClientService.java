@@ -7,8 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import ru.tinkoff.landscapeService.clientType.ClientType;
-import ru.tinkoff.landscapeService.clientType.ClientTypeService;
+import ru.tinkoff.landscapeService.client_type.ClientType;
+import ru.tinkoff.landscapeService.client_type.ClientTypeService;
 
 import java.util.UUID;
 

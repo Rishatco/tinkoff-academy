@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import ru.tinkoff.rancherService.landscape.Client.Client;
-import ru.tinkoff.rancherService.landscape.Client.ClientDTO;
+import ru.tinkoff.rancherService.landscape.client.Client;
+import ru.tinkoff.rancherService.landscape.client.ClientDTO;
 import java.util.UUID;
 
 @Service

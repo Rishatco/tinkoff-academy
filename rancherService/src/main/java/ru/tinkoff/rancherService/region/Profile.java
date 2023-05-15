@@ -1,8 +1,8 @@
-package ru.tinkoff.rancherService.Region;
+package ru.tinkoff.rancherService.region;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.tinkoff.rancherService.landscape.Client.Client;
+import ru.tinkoff.rancherService.landscape.client.Client;
 
 @Data
 @AllArgsConstructor

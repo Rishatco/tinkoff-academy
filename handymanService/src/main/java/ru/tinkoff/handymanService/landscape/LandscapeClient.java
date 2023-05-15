@@ -2,8 +2,8 @@ package ru.tinkoff.handymanService.landscape;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import ru.tinkoff.handymanService.landscape.Client.Client;
-import ru.tinkoff.handymanService.landscape.Client.ClientDTO;
+import ru.tinkoff.handymanService.landscape.сlient.Client;
+import ru.tinkoff.handymanService.landscape.сlient.ClientDTO;
 
 import java.util.UUID;
 

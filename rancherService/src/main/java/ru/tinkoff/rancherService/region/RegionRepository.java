@@ -1,4 +1,4 @@
-package ru.tinkoff.rancherService.Region;
+package ru.tinkoff.rancherService.region;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

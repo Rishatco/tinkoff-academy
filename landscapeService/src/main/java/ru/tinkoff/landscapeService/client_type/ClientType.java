@@ -1,4 +1,4 @@
-package ru.tinkoff.landscapeService.clientType;
+package ru.tinkoff.landscapeService.client_type;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

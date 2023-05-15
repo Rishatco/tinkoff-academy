@@ -1,4 +1,4 @@
-package ru.tinkoff.handymanService.landscape.Client;
+package ru.tinkoff.handymanService.landscape.сlient;
 
 import lombok.Builder;
 import lombok.Data;

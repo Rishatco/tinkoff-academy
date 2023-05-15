@@ -2,7 +2,7 @@ package ru.tinkoff.handymanService.handyman;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.tinkoff.handymanService.landscape.Client.Client;
+import ru.tinkoff.handymanService.landscape.сlient.Client;
 
 @Data
 @AllArgsConstructor

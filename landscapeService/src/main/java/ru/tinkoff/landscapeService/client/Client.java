@@ -1,7 +1,7 @@
 package ru.tinkoff.landscapeService.client;
 
 import lombok.*;
-import ru.tinkoff.landscapeService.clientType.ClientType;
+import ru.tinkoff.landscapeService.client_type.ClientType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

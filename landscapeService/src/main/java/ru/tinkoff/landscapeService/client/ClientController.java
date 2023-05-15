@@ -16,7 +16,7 @@ public class ClientController {
     private final ClientService clientService;
 
     @GetMapping("/{id}")
-    public Client findById(@PathVariable UUID id){
+    public Client getById(@PathVariable UUID id){
         return clientService.getById(id);
     }
 
