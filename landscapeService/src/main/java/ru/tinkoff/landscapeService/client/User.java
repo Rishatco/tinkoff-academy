@@ -1,7 +1,7 @@
 package ru.tinkoff.landscapeService.client;
 
 import lombok.*;
-import ru.tinkoff.landscapeService.client_type.ClientType;
+import ru.tinkoff.landscapeService.client_type.UserType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Table(name = "client")
-public class Client {
+public class User {
 
     @Id
     @GeneratedValue
@@ -30,7 +30,7 @@ public class Client {
 
     @ManyToOne
     @JoinColumn(name = "client_type_v2")
-    private ClientType clientType;
+    private UserType userType;
 
     @Column(name = "creationdate")
     private LocalDateTime creationDate;

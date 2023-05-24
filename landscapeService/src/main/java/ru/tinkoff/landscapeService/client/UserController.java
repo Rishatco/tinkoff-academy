@@ -11,29 +11,29 @@ import java.util.UUID;
 @RestController
 @RequestMapping("client")
 @RequiredArgsConstructor
-public class ClientController {
+public class UserController {
 
-    private final ClientService clientService;
+    private final UserService userService;
 
     @GetMapping("/{id}")
-    public Client getById(@PathVariable UUID id){
-        return clientService.getById(id);
+    public User getById(@PathVariable UUID id){
+        return userService.getById(id);
     }
 
     @GetMapping
-    public Page<Client> getAll(
+    public Page<User> getAll(
             @RequestParam(value = "offset", defaultValue = "0") @Min(0) Integer page,
             @RequestParam(value = "limit", defaultValue = "20") @Min(1) @Max(100) Integer size){
-        return clientService.getAll(page, size);
+        return userService.getAll(page, size);
     }
 
     @PostMapping
-    public Client create(@RequestBody ClientDTO clientDTO){
-        return clientService.save(clientDTO);
+    public User create(@RequestBody UserDTO userDTO){
+        return userService.save(userDTO);
     }
 
     @PutMapping("/{id}")
-    public Client update(@PathVariable UUID id, @RequestBody ClientDTO clientDTO){
-        return clientService.update(clientDTO, id);
+    public User update(@PathVariable UUID id, @RequestBody UserDTO userDTO){
+        return userService.update(userDTO, id);
     }
 }

@@ -8,16 +8,16 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
-public class ClientTypeService {
+public class UserTypeService {
 
-    private final ClientTypeRepository clientTypeRepository;
+    private final UserTypeRepository userTypeRepository;
 
     /**
      *
      * @param id - clientType id
      * @return clientType with given id
      */
-    public ClientType getById(Long id){
-       return clientTypeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "can't find clienttype with id = " + id));
+    public UserType getById(Long id){
+       return userTypeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "can't find clienttype with id = " + id));
     }
 }

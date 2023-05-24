@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Table(name = "client_type_v2")
-public class ClientType{
+public class UserType {
 
     @Id
     @GeneratedValue

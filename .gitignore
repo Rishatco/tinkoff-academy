@@ -195,3 +195,5 @@ gradle-app.setting
 /landscapeService/src/main/resources/liquibase.properties
 /landscapeService/src/main/resources/liquibase.properties
 /dev/mongo-data/
+/dev/grafana-data/
+/dev/prometheus_data/
