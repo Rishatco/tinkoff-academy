@@ -6,7 +6,7 @@ RUN apk update && apk add gcompat
 RUN gradle bootJar
 
 FROM amazoncorretto:17-alpine-jdk
-COPY --from=build /workspace/app/build/libs/HandymanService-0.3.1-SNAPSHOT.jar /HandymanService.jar
+COPY --from=build /workspace/app/build/libs/HandymanService-0.4.1-SNAPSHOT.jar /HandymanService.jar
 
 EXPOSE 8080
 EXPOSE 8091
