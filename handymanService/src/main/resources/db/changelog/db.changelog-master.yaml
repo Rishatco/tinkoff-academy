@@ -1,7 +1,7 @@
 databaseChangeLog:
-  - changeSet:
-      id: 1
-      author: sagidullin.rr
-      changes:
-        - createCollection:
-            collectionName: users
+  - include:
+      file: 2023-06-17--01-create-handyman-users.sql
+  - include:
+      file: 2023-06-17--02-create-user-skills.sql
+  - include:
+      file: 2023-06-17--03-create-account.sql

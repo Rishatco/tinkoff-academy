@@ -22,7 +22,11 @@ spring:
       password: rootpassword
   liquibase:
     enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yaml
+    change-log: classpath:db/changelog/db.changelog-mongo.yaml
 application:
+  datasource:
+    url: ${POSTGRES_DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   landscape:
     url: ${LANDSCAPE_URL}

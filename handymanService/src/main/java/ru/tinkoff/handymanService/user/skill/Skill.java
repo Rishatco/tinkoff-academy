@@ -25,7 +25,7 @@ public class Skill {
     private String name;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "handyman_user")
+    @JoinColumn(name = "handyman_user_id")
     private HandymanUser handymanUser;
 
 }
