@@ -20,7 +20,7 @@ services:
       RANCHER_GRPC_SERVER_ADDRESS: static://rancher-service:8090
       DB_USERNAME: postgres
       DB_PASSWORD: 1234
-      DB_URL: jdbc:postgresql://postgres:5432/postgres?currentSchema=public
+      POSTGRES_DB_URL: jdbc:postgresql://postgres:5432/postgres?currentSchema=public
     depends_on:
       - handyman-service
       - rancher-service
@@ -41,6 +41,9 @@ services:
     environment:
       - MONGO_DB_URI=mongodb://mongodb:27017/handyman
       - LANDSCAPE_URL=http://landscape-service:8081/
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=1234
+      - POSTGRES_DB_URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
     depends_on:
       - mongodb
     restart: always
@@ -59,12 +62,15 @@ services:
     environment:
       - MONGO_DB_URI=mongodb://mongodb:27017/rancher
       - LANDSCAPE_URL=http://landscape-service:8081/
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=1234
+      - POSTGRES_DB_URL=jdbc:postgresql://postgres:5432/postgres?currentSchema=public
     depends_on:
       - mongodb
     restart: always
 
   postgres:
-    image: postgres
+    image: postgis/postgis
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234

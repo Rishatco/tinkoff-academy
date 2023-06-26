@@ -23,7 +23,7 @@ public class Account {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "handyman_user")
+    @JoinColumn(name = "handyman_user_id")
     private HandymanUser handymanUser;
 
     @Column(name = "card_number")

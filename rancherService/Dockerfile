@@ -6,7 +6,7 @@ RUN apk update && apk add gcompat
 RUN gradle bootJar
 
 FROM amazoncorretto:17-alpine-jdk
-COPY --from=build /workspace/app/build/libs/RancherService-0.4.1-SNAPSHOT.jar /RancherService.jar
+COPY --from=build /workspace/app/build/libs/RancherService-0.8.1-SNAPSHOT.jar /RancherService.jar
 
 EXPOSE 8082
 EXPOSE 8090

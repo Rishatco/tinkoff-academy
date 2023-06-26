@@ -1,14 +1,13 @@
 package ru.tinkoff.rancherService.field;
 
-import liquibase.pro.packaged.F;
+import liquibase.pro.packaged.N;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ru.tinkoff.rancherService.gardener.Gardener;
-import ru.tinkoff.rancherService.gardener.GardenerService;
+import ru.tinkoff.rancherService.gardener.GardenerRepository;
 
-import java.io.File;
 import java.util.List;
 
 @Service
@@ -16,7 +15,7 @@ import java.util.List;
 public class FieldService {
 
     private final FieldRepository fieldRepository;
-    private final GardenerService gardenerService;
+    private final GardenerRepository gardenerRepository;
 
     public Field create(FieldDTO fieldDTO, Long gardenedId) {
         Field creatingField = new Field();
@@ -25,7 +24,8 @@ public class FieldService {
         creatingField.setArea(fieldDTO.getArea());
         creatingField.setAddress(fieldDTO.getAddress());
 
-        Gardener gardener = gardenerService.getById(gardenedId);
+        Gardener gardener = gardenerRepository.findById(gardenedId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "cannot find gardener with  id="+gardenedId));
         creatingField.setGardener(gardener);
 
         return fieldRepository.save(creatingField);
