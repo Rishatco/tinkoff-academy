@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/2023-06-17--01-create-handyman-users.sql
+  - include:
+      file: db/2023-06-17--02-create-users-skills.sql
+  - include:
+      file: db/2023-06-17--03-create-account.sql

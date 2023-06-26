@@ -3,3 +3,7 @@ databaseChangeLog:
       file: db/2023-03-21--01-create-user-table.sql
   - include:
       file: db/2023-03-21--05-change-clienttype.sql
+  - include:
+      file: db/2023-04-22--01-add-coordinate.sql
+  - include:
+      file: db/2023-06-18--08-add-order.sql

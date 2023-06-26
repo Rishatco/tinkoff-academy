@@ -32,3 +32,9 @@
 3) выполнить команду `minikube service service-name --url`, где `service-name` имя необходимого сервиса.
 4) По окончанию работ выполнить комадну `kubectl delete all --all`.
 5) Остановить minikube командой `minikube stop`
+
+## Запуск grafana
+1) Открыть в браузере `http://localhost:3000`
+2) Ввести логин и пароль из docker-compose файла
+3) Установить источник данных `http://prometheus:9090`
+4) Импортировать dashboard из json файла
