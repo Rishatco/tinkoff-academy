@@ -54,7 +54,7 @@ public class HandymanService {
     /**
      * @return all Handyman from bd
      */
-    public List<Profile> getAll(Integer page, Integer size){
+    public List<Profile> getPage(Integer page, Integer size){
         Page<Handyman> handymen = handymanRepository.findAll(PageRequest.of(page, size));
         return  handymen.stream()
                 .map(handyman -> new Profile(handyman, landscapeService.getById(handyman.getSubId())))

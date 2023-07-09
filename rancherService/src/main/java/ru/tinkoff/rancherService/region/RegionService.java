@@ -49,7 +49,7 @@ public class RegionService {
     /**
      * @return all Rancher Profiles
      */
-    public List<Profile> getAll(Integer page, Integer size) {
+    public List<Profile> getPage(Integer page, Integer size) {
         Page<Region> regions = regionRepository.findAll(PageRequest.of(page, size));
         return regions.stream().map(region -> new Profile(region, landscapeService.getById(region.getSubId()))).toList();
     }

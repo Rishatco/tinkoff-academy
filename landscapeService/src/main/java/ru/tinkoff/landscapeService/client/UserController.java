@@ -24,10 +24,10 @@ public class UserController {
 
     @Timed
     @GetMapping
-    public Page<User> getAll(
+    public Page<User> getPage(
             @RequestParam(value = "offset", defaultValue = "0") @Min(0) Integer page,
             @RequestParam(value = "limit", defaultValue = "20") @Min(1) @Max(100) Integer size){
-        return userService.getAll(page, size);
+        return userService.getPage(page, size);
     }
 
     @Timed

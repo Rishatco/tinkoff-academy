@@ -17,10 +17,10 @@ public class HandymanController {
 
     @Timed
     @GetMapping
-    public List<Profile> getAll(
+    public List<Profile> getPage(
             @RequestParam(value = "offset", defaultValue = "0") @Min(0) Integer page,
             @RequestParam(value = "limit", defaultValue = "20") @Min(1) @Max(100) Integer size) {
-        return handymanService.getAll(page, size);
+        return handymanService.getPage(page, size);
     }
 
     @Timed

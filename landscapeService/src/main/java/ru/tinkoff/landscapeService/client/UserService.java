@@ -35,7 +35,7 @@ public class UserService {
      * @return page with clients
      */
 
-    public Page<User> getAll(Integer offset, Integer limit){
+    public Page<User> getPage(Integer offset, Integer limit){
         return userRepository.findAll(PageRequest.of(offset, limit));
     }
 
